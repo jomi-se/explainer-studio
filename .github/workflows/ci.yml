@@ -1,28 +1,43 @@
 # check: static checks (syntax, formatting, determinism rules) + motion-maths selftest — Node only
-# lint:  layout + seek-order determinism lint of every film that doesn't need a screen
-#        recording (recordings are never committed, so footage films can't build here)
+# lint:  layout + seek-order determinism lint of every film that doesn't need a screen recording
+#        (recordings are never committed, so footage films can't build here)
 name: CI
 
 on:
   push:
+    branches: [main]
   pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   check:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
         with:
           node-version: 22
       - run: node scripts/check.mjs
       - run: node scripts/selftest.mjs
 
   lint:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
         with:
           node-version: 22
           cache: npm
@@ -35,7 +50,7 @@ jobs:
             if [ -f "projects/$p/footage.js" ]; then echo "skip $p: needs its screen recording"; continue; fi
             node scripts/lint.mjs "$p" --determinism || exit 1
           done
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         if: failure()
         with:
           name: lint

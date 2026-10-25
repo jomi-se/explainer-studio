@@ -1,5 +1,9 @@
 # Explainer Studio
 
+> [!WARNING]
+> This is fully vibe-coded. Claude Code wrote all of it, and no human has ever read this code. It
+> works on my machine and made the film below; beyond that, you're on your own.
+
 Explainer films written as code, made to be driven by Claude Code.
 
 Each scene is an HTML/SVG module whose every pixel is a pure function of time. The scripts open the
@@ -133,6 +137,10 @@ out/         renders, stills and lint reports (gitignored)
 |---|---|
 | `check` | `check` and `selftest` (Node only, no install needed) |
 | `lint` | `npm ci`, Playwright's Chromium, then `lint --determinism` for every film that doesn't need a screen recording (recordings are never committed) |
+
+`secret-scan.yml` runs Gitleaks over the whole history on every push and weekly, and `workflow-check.yml`
+validates the workflows with actionlint. Dependabot proposes grouped monthly updates for npm and Actions.
+See [`SECURITY.md`](SECURITY.md).
 
 To publish a film as a static page, `node scripts/export.mjs making-of --out public/index.html` writes one
 self-contained HTML file that any static host can serve. On a system where Playwright's own Chromium doesn't run
