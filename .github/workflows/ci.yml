@@ -1,0 +1,42 @@
+# check: static checks (syntax, formatting, determinism rules) + motion-maths selftest — Node only
+# lint:  layout + seek-order determinism lint of every film that doesn't need a screen
+#        recording (recordings are never committed, so footage films can't build here)
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/check.mjs
+      - run: node scripts/selftest.mjs
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npx playwright install --with-deps chromium
+      - name: lint --determinism, every film without footage
+        run: |
+          for c in projects/*/composition.js; do
+            p=$(basename "$(dirname "$c")")
+            if [ -f "projects/$p/footage.js" ]; then echo "skip $p: needs its screen recording"; continue; fi
+            node scripts/lint.mjs "$p" --determinism || exit 1
+          done
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: lint
+          path: out/*/lint.json

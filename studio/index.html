@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Explainer Studio</title>
+    <!-- no favicon request (full Chromium asks for /favicon.ico; a 404 there fails lint) -->
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="./base.css" />
+  </head>
+  <body>
+    <div id="viewport"><div id="stage"></div></div>
+    <div id="transport" hidden>
+      <button id="play" title="space">▶</button>
+      <input id="scrub" type="range" min="0" value="0" />
+      <span id="time"></span>
+      <div id="scenes"></div>
+    </div>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,66 @@
+/* Graphite — the studio's house theme: cool graphite, lime for what's trusted, blue for the agent,
+   semibold headlines with tight tracking. Mapped onto the studio tokens. See BRAND.md for what
+   each colour means. List it in composition.styles AFTER the fonts. */
+
+:root {
+  /* raw palette */
+  --gr-ink-900: #0a0d12;
+  --gr-graphite-100: #0d1117;
+  --gr-graphite-90: #121722;
+  --gr-graphite-80: #283041;
+  --gr-graphite-70: #333c4f;
+  --gr-graphite-60: #566076;
+  --gr-graphite-40: #8b95a8;
+  --gr-slate-100: #182030;
+  --gr-paper-10: #f4f7fb;
+  --gr-paper-50: #e3e9f2;
+  --gr-paper-70: #c5cddb;
+  --gr-sand-100: #efc77e;
+  --gr-lime-100: #b5f07a;
+  --gr-lime-120: #8fcf55;
+  --gr-lime-150: #4d7f2a;
+  --gr-lime-glow: #5f8a45;
+  --gr-lime-soft: #1c2a1c;
+  --gr-blue-100: #74b0ff;
+  --gr-blue-110: #4f8ff0;
+  --gr-blue-soft: #16253d;
+  --gr-coral-60: #ff7a72;
+
+  /* studio tokens */
+  --bg: var(--gr-graphite-100);
+  --bg-2: var(--gr-graphite-90);
+  --surface: var(--gr-slate-100);
+  --surface-2: var(--gr-graphite-80);
+  --line: var(--gr-graphite-70);
+  --ink: var(--gr-paper-10);
+  --ink-2: var(--gr-paper-70);
+  --ink-3: var(--gr-graphite-40);
+  --accent: var(--gr-lime-100);
+  --accent-2: var(--gr-blue-100);
+  --warn: var(--gr-sand-100);
+  --danger: var(--gr-coral-60);
+
+  --font-sans: 'Inter Variable', Inter, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, monospace;
+  --radius: 14px;
+  --radius-sm: 10px;
+
+  /* typography: semibold display, medium headings, regular text */
+  --gr-display-weight: 650;
+  --gr-display-tracking: -0.022em;
+  --gr-heading-weight: 500;
+  --gr-heading-tracking: -0.01em;
+}
+
+/* Utility classes */
+.gr-headline { font-weight: var(--gr-display-weight); letter-spacing: var(--gr-display-tracking); line-height: 1.1; color: var(--ink); }
+.gr-em { color: var(--accent); }                       /* the one emphasised word in a headline */
+.gr-eyebrow { font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-2); }
+.gr-panel { background: color-mix(in srgb, var(--gr-slate-100) 75%, var(--bg)); border: 1px solid var(--line); border-radius: var(--radius); }
+.gr-btn { display: inline-block; border-radius: var(--radius-sm); padding: 0.45em 0.9em; font-weight: 600; background: var(--accent); color: var(--gr-ink-900); }
+.gr-btn-blue { background: var(--accent-2); color: var(--gr-ink-900); }
+.gr-btn-ghost { background: transparent; color: var(--accent); border: 1.5px solid var(--accent); }
+.gr-pill { display: inline-block; border-radius: 999px; padding: 0.3em 0.9em; border: 1px solid var(--gr-lime-glow); background: var(--gr-lime-soft); color: var(--accent); font-family: var(--font-mono); }
+/* a cool, low glow behind hero content — a pre-rendered bitmap (make-glow.mjs);
+   don't inline big CSS gradients in scenes, they cost ~5x render time */
+.gr-glow { background: url('./glow.png') center / 100% 100% no-repeat, var(--bg); }

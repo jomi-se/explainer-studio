@@ -1,0 +1,16 @@
+# Script — How this video was made (~85 s)
+
+On-screen text is verbatim. `**x**` lime, `__x__` blue, `~~x~~` red. Times are scene-local seconds.
+A **frame counter** (`frame 0123 / NNNN · t = 4.10 s`) sits top-right for the whole film (layer `hud`).
+
+| # | Scene | Dur | Visual | On-screen text | Sound |
+|---|---|---|---|---|---|
+| 1 | title | 4.2 | Droste: the title card sits inside a screen inside itself; the camera zooms in forever | eyebrow `explainer-studio` · **How this video was made** · "A film that explains its own making" | whoosh, hit, rising plucks |
+| 2 | flipbook | 8.5 | A strip of frame cards, the ball a little further in each; they stack and flick like a flipbook, the ball moves; the counter shows this film's real frame total | 0.3 "A video is a flipbook: **30 pictures** every second" · 4.4 "This film: **N pictures**, each drawn on purpose" | ticks on each card, flick rattle |
+| 3 | browser | 8 | Code panel (`mount`/`update(t)`) → arrow → a dashed browser window (no window = headless) drawing the ball; a Playwright "remote" plugs in | 0.4 "Who draws them? A web browser, with no window" · 4.2 "A script drives it: __Playwright__ + headless __Chromium__" | pluck, plug thump |
+| 4 | seek | 13.2 | A playhead scrubber. Two lanes: red `x = x + 5` every tick, lime `x = 100 + 300·t`. The playhead jumps; the lime ball lands instantly, the red one is lost ("?"). Pointer to the counter | 0.3 "`seek(t)`: jump straight to any moment" · 4.3 "Not ~~“move a bit every tick”~~, but a **formula of t**" · 8.8 "Same **t**, same picture. Even the counter up there ↗" | tick per jump, deny on red, grant on lime |
+| 5 | render | 11.5 | 4 browser lanes each shoot numbered frames (lane 1: 1–N/4 …) into an ffmpeg funnel → `.mp4` file | 0.3 "Rendering: **seek, screenshot, repeat**" · 3.8 "4 browsers split the frames. None needs the one before." · 8.2 "__ffmpeg__ packs them into an **MP4**" | shutter ticks, whoosh, grant |
+| 6 | motion | 10 | A spring curve draws itself; a square pops using the same number; the curve morphs into a sound wave | 0.3 "No animation library. A bounce is a **spring formula**" · 4.6 "Even the music is computed: **sound waves from t**" | bouncy pop, pad swell |
+| 7 | footage | 9 | A drawn terminal recording on a timeline; an edit list cuts and speeds parts; a blur slides over a secret line | 0.3 "Real screen recordings? An edit list cuts and speeds them up" · 4.7 "Secrets are **blurred into the frames** before they're used" | scissor ticks, whoosh |
+| 8 | claude | 14 | Claude badge; file chips appear one by one (SOURCE_NOTES → BRIEF → SCRIPT → scenes/*.js → REVIEW → audio.js); a loop (write → lint → stills → look → fix) spins; the "look" step opens a real contact sheet of this film | 0.3 "How __Claude__ makes one: each step leaves a **file**" · 4.6 "Then a loop: write, lint, render stills, **look**, fix" · 9.0 "Claude checks its work by reading stills. These are **this film's**." | pops per chip, loop ticks |
+| 9 | end | 7.5 | Three recap rows, a footer of facts; then the card shrinks into a frame card: the last frame of the film | rows: "Every frame: a web page at time `t`" · "`seek`, screenshot, repeat → **MP4**" · "__Claude__ writes it, then **looks** at it" · foot "explainer-studio · 5 dependencies · ~34 KB engine · no animation library" | pops, final chord |

@@ -1,0 +1,12 @@
+.demo-title { position: absolute; inset: 0; background: inherit; display: grid; place-content: center; text-align: center; gap: 28px; }
+.demo-title h1 { margin: 0; font-size: var(--t-display); line-height: 1.1; }
+
+.demo-title p { margin: 0; font-size: var(--t-h3); color: var(--ink-2); font-weight: 450; }
+.demo-title .rule { height: 6px; width: 520px; margin: 0 auto; border-radius: 3px; background: var(--accent); transform-origin: 0 50%; }
+
+.node { position: absolute; width: 360px; height: 200px; margin: -100px 0 0 -180px; display: grid; place-content: center; text-align: center; gap: 8px; }
+.node b { font-size: var(--t-h3); font-weight: 400; }
+.node span { font-size: var(--t-small); color: var(--ink-3); font-family: var(--font-mono); }
+.token { position: absolute; width: 112px; height: 56px; margin: -28px 0 0 -56px; border-radius: 28px; background: var(--accent-2); color: var(--gr-ink-900); font: 500 var(--t-min) / 56px var(--font-mono); text-align: center; }
+.caption { position: absolute; left: var(--safe-x); right: var(--safe-x); bottom: calc(var(--safe-y) + 40px); text-align: center; font-size: var(--t-h3); color: var(--ink); }
+.progress { position: absolute; left: 0; bottom: 0; height: 6px; background: var(--accent); transform-origin: 0 50%; }

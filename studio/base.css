@@ -1,0 +1,77 @@
+/* Base tokens and stage chrome. Projects override tokens in their own CSS
+   (composition.styles). All sizes assume a 1920×1080 stage — the stage is
+   scaled as a whole, never reflowed. */
+
+:root {
+  /* palette — neutral placeholder; projects replace it */
+  --bg: #0b0d12;
+  --bg-2: #12151d;
+  --surface: #181c26;
+  --surface-2: #222736;
+  --line: #2e3446;
+  --ink: #f2f4f8;
+  --ink-2: #b4bccc;
+  --ink-3: #7c869b;
+  --accent: #5b8cff;
+  --accent-2: #2fd3a7;
+  --warn: #ffb547;
+  --danger: #ff5d6c;
+
+  /* type scale at 1080p. Nothing smaller than --t-min ever ships. */
+  --font-sans: 'Inter Variable', Inter, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
+  --t-display: 128px;
+  --t-h1: 88px;
+  --t-h2: 64px;
+  --t-h3: 48px;
+  --t-body: 40px;
+  --t-small: 32px;
+  --t-min: 28px;
+
+  /* safe area: 5% horizontal, 6% vertical (title-safe) */
+  --safe-x: 96px;
+  --safe-y: 64px;
+
+  --radius: 20px;
+  --radius-sm: 12px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: #000; color: var(--ink); font-family: var(--font-sans); }
+body { overflow: hidden; -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision; }
+
+/* Scenes never use CSS transitions/animations — every pixel comes from seek(t).
+   will-change would pin raster state across frames and break determinism. */
+#stage, #stage * { transition: none !important; animation: none !important; will-change: auto !important; }
+
+#stage { position: absolute; left: 0; top: 0; overflow: hidden; transform-origin: 0 0; font-size: var(--t-body); line-height: 1.25; }
+.scene { position: absolute; inset: 0; overflow: hidden; }
+.safe { position: absolute; inset: var(--safe-y) var(--safe-x); }
+
+/* preview chrome */
+html[data-mode='preview'] #viewport { position: absolute; inset: 0 0 76px 0; background: #050608; }
+html[data-mode='render'] #viewport { position: absolute; inset: 0; }
+#transport { position: fixed; left: 0; right: 0; bottom: 0; height: 76px; display: grid; grid-template-columns: auto 1fr auto; grid-template-rows: 1fr auto; gap: 4px 12px; align-items: center; padding: 6px 14px; background: #111; font: 13px/1.2 ui-monospace, monospace; color: #ccc; }
+#transport[hidden] { display: none; }
+#transport button { background: #222; color: #ddd; border: 1px solid #333; border-radius: 6px; padding: 3px 8px; font: inherit; cursor: pointer; }
+#transport button.on { background: #2b4a9a; border-color: #4466cc; color: #fff; }
+#transport.looping #play { outline: 2px solid #e6a23c; }
+#scrub { width: 100%; }
+#scenes { grid-column: 1 / -1; display: flex; gap: 6px; overflow-x: auto; }
+/* viewer chrome (exported film) */
+html[data-mode='viewer'] #viewport { position: absolute; inset: 0; background: #000; }
+html[data-mode='viewer'] #transport { height: auto; padding: 28px 18px 12px; grid-template-columns: auto 1fr auto auto; background: linear-gradient(transparent, rgb(0 0 0 / 0.85) 45%); font: 13px/1.2 system-ui, sans-serif; z-index: 10; transition: opacity 0.4s; }
+html[data-mode='viewer'] #transport button { background: rgb(255 255 255 / 0.08); border-color: rgb(255 255 255 / 0.12); border-radius: var(--radius-sm); font-family: var(--font-sans); }
+html[data-mode='viewer'] #transport button.on { background: color-mix(in srgb, var(--accent) 22%, transparent); border-color: var(--accent); color: var(--ink); }
+html[data-mode='viewer'] #transport { font-family: var(--font-sans); color: var(--ink-2); }
+html[data-mode='viewer'] #scrub { accent-color: var(--accent); }
+html[data-mode='viewer'] #scenes { grid-column: 1 / -1; order: -1; }
+body.idle #transport { opacity: 0; }
+body.idle { cursor: none; }
+#overlay { position: fixed; inset: 0; z-index: 20; display: grid; place-content: center; justify-items: center; gap: 18px; border: 0; background: color-mix(in srgb, var(--bg) 60%, transparent); backdrop-filter: blur(14px); color: var(--ink); cursor: pointer; font-family: var(--font-sans); }
+#overlay[hidden] { display: none; }
+#overlay .ov-play { width: 112px; height: 112px; border-radius: 50%; display: grid; place-content: center; font-size: 44px; background: color-mix(in srgb, var(--accent) 14%, transparent); border: 2px solid var(--accent); color: var(--accent); }
+#overlay:hover .ov-play { background: color-mix(in srgb, var(--accent) 28%, transparent); }
+#overlay .ov-title { font-size: clamp(22px, 3.4vw, 48px); font-weight: 600; letter-spacing: -0.01em; text-align: center; padding: 0 24px; }
+#overlay .ov-meta { font-size: 14px; opacity: 0.7; }
+.fatal { position: fixed; inset: 20px; color: #ff8080; background: #200; padding: 20px; white-space: pre-wrap; z-index: 99999; font: 14px ui-monospace, monospace; }

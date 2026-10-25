@@ -1,0 +1,71 @@
+/* making-of — film styles on top of brands/graphite/theme.css */
+
+.scene { color: var(--ink); }
+.bg { position: absolute; inset: 0; }
+.world { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
+.anchor { position: absolute; translate: -50% -50%; width: max-content; }
+.abs { position: absolute; }
+
+/* ── text ─────────────────────────────────────────── */
+.em { color: var(--accent); }
+.ag { color: var(--accent-2); }
+.rk { color: var(--danger); }
+code { font-family: var(--font-mono); font-size: 0.86em; color: var(--ink-2); }
+.em code, code.em { color: var(--accent); }
+.rk code { color: var(--danger); }
+
+.big { font-size: var(--t-display); font-weight: var(--gr-display-weight); line-height: 1.04; letter-spacing: var(--gr-display-tracking); margin: 0; }
+.h2 { font-size: var(--t-h2); font-weight: var(--gr-display-weight); line-height: 1.12; letter-spacing: var(--gr-display-tracking); margin: 0; }
+.sub { font-size: var(--t-h3); font-weight: 400; color: var(--ink-2); margin: 0; }
+.eyebrow { font-size: var(--t-min); letter-spacing: 0.14em; text-transform: uppercase; }
+.mono { font-family: var(--font-mono); }
+.label { font-family: var(--font-mono); font-size: var(--t-min); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-2); white-space: nowrap; }
+
+.caption { position: absolute; left: var(--safe-x); right: var(--safe-x); bottom: 70px; text-align: center; }
+.caption p { display: inline-block; margin: 0 auto; padding: 12px 34px 16px; border-radius: 16px; background: rgb(8 11 17 / 0.88);
+  font-size: 50px; font-weight: 400; line-height: 1.2; white-space: nowrap; }
+
+/* ── cast ─────────────────────────────────────────── */
+.ball { position: absolute; width: 64px; height: 64px; margin: -32px 0 0 -32px; border-radius: 50%; background: var(--accent);
+  box-shadow: 0 0 0 10px color-mix(in srgb, var(--accent) 18%, transparent); }
+.ball.rk { background: var(--danger); box-shadow: 0 0 0 10px color-mix(in srgb, var(--danger) 18%, transparent); }
+
+.fcard { position: absolute; border-radius: 16px; border: 2px solid var(--line); overflow: hidden;
+  background: color-mix(in srgb, var(--gr-slate-100) 75%, var(--bg)); }
+.fcard .num { position: absolute; left: 14px; top: 10px; font: 500 var(--t-min) / 1 var(--font-mono); color: var(--ink-3); }
+.fcard .fball { position: absolute; width: 34px; height: 34px; margin: -17px 0 0 -17px; border-radius: 50%; background: var(--accent); }
+
+.card { border-radius: 18px; border: 2px solid var(--line); background: color-mix(in srgb, var(--gr-slate-100) 70%, var(--bg)); }
+.win-bar { height: 58px; display: flex; align-items: center; gap: 12px; padding: 0 22px; border-bottom: 1.5px solid var(--line); }
+.win-bar i { width: 16px; height: 16px; border-radius: 50%; background: var(--gr-graphite-60); }
+.win-bar .url { margin-left: 12px; flex: 1; height: 36px; border-radius: 999px; background: rgb(0 0 0 / 0.28); display: flex; align-items: center; padding: 0 18px;
+  font: 400 var(--t-min) / 1 var(--font-mono); color: var(--ink-2); white-space: nowrap; overflow: hidden; }
+.browser { border-color: var(--accent-2); }
+.browser.headless { border-style: dashed; background: transparent; }
+
+.codebox { padding: 26px 32px; font: 400 32px / 1.55 var(--font-mono); color: var(--ink-2); white-space: pre; }
+.codebox .k { color: var(--accent-2); }
+.codebox .n { color: var(--accent); }
+.codebox .c { color: var(--ink-3); }
+.codebox .r { color: var(--danger); }
+
+.chip { position: absolute; display: flex; align-items: center; gap: 12px; padding: 10px 22px; border-radius: 999px;
+  font: 500 var(--t-min) / 1 var(--font-mono); letter-spacing: 0.04em; background: rgb(8 11 17 / 0.86);
+  border: 1.5px solid var(--line); color: var(--ink); white-space: nowrap; }
+.chip.em { color: var(--accent); border-color: var(--gr-lime-glow); }
+.chip.ag { color: var(--accent-2); border-color: var(--gr-blue-110); }
+.chip.rk { color: var(--danger); border-color: var(--danger); }
+
+.file { display: flex; align-items: center; gap: 14px; padding: 14px 22px; border-radius: 12px; border: 2px solid var(--line); background: rgb(0 0 0 / 0.22);
+  font: 400 32px/1 var(--font-mono); color: var(--ink); white-space: nowrap; }
+.badge { width: 92px; height: 92px; border-radius: 24px; display: grid; place-items: center; border: 3px solid currentColor; flex: none; }
+.row { display: flex; align-items: center; gap: 36px; }
+
+/* ── hud: the film's own frame counter ───────────── */
+.hud { position: absolute; right: var(--safe-x); top: var(--safe-y); display: flex; gap: 18px; align-items: center;
+  font: 500 var(--t-min) / 1 var(--font-mono); color: var(--ink-3); letter-spacing: 0.04em; white-space: nowrap;
+  padding: 10px 18px; border-radius: 12px; background: rgb(8 11 17 / 0.7); border: 1.5px solid color-mix(in srgb, var(--line) 70%, transparent); }
+.hud b { font-weight: 600; color: var(--ink-2); }
+.hud .dot { width: 14px; height: 14px; border-radius: 50%; background: var(--danger); }
+.hud.lit { color: var(--accent); border-color: var(--gr-lime-glow); }
+.hud.lit b { color: var(--accent); }
