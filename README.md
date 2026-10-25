@@ -34,6 +34,11 @@ same for Chromium. A macOS checkout and a Linux dev container each need their ow
 
 ## Watch the example
 
+**[Who let the agent in?](https://jomi-se.github.io/explainer-studio/)** plays in your browser. It is
+the agentic-auth film, exported to [`docs/index.html`](docs/index.html) and served by GitHub Pages.
+
+To build it yourself:
+
 ```sh
 node scripts/export.mjs agentic-auth    # → out/agentic-auth/agentic-auth.html (~10 MB)
 open out/agentic-auth/agentic-auth.html
